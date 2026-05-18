@@ -10,7 +10,7 @@ export const ui = {
     },
     hero: {
       tagline: "Engineer.",
-      location: "Izmir, Türkiye",
+      location: "İzmir, Türkiye",
     },
     sections: {
       about: "About",
@@ -19,7 +19,7 @@ export const ui = {
       contact: "Contact",
     },
     about:
-      "Computer engineering student in Izmir. Drinking coffee and shipping side projects in my spare time.",
+      "Computer engineering student in İzmir. Drinking coffee and developing side projects in my spare time.",
     timeline: [
       {
         date: "Sep 2021",
@@ -29,7 +29,7 @@ export const ui = {
       },
       {
         date: "Aug 2025 - Sep 2025",
-        title: "IYTE",
+        title: "İYTE",
         sub: "Computer Engineering Intern",
         status: "done",
       },
@@ -43,7 +43,7 @@ export const ui = {
       },
       yuscheduler: {
         tagline:
-          "Client-side course scheduler that generates conflict-free combinations from blocked-hour preferences.",
+          "Client-side course scheduler that generates conflict-free combinations from preferences.",
         tech: "SvelteKit · TypeScript",
       },
     },
@@ -69,7 +69,7 @@ export const ui = {
       contact: "İletişim",
     },
     about:
-      "İzmir'de bilgisayar mühendisliği öğrencisi. Boş zamanlarımda kahve içip yan projeler çıkarıyorum.",
+      "İzmir'de bilgisayar mühendisliği öğrencisiyim. Boş zamanlarımda kahve içip yan projeler geliştiriyorum.",
     timeline: [
       {
         date: "Eyl 2021",
@@ -93,7 +93,7 @@ export const ui = {
       },
       yuscheduler: {
         tagline:
-          "Bloklanmış saat tercihlerinden çakışmasız ders kombinasyonları üreten istemci taraflı bir program oluşturma aracı.",
+          "Tercihlerden çakışmasız ders programı kombinasyonları üreten istemci taraflı bir program oluşturma aracı.",
         tech: "SvelteKit · TypeScript",
       },
     },
