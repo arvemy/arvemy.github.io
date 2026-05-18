@@ -134,11 +134,11 @@ const ui = t(lang);
     <div class="site-loader" role="status" aria-label={ui.loading}>
       <span class="site-loader__ring" aria-hidden="true"></span>
     </div>
-    <main data-site-content class="mx-auto max-w-2xl px-6 py-12">
+    <main data-site-content class="mx-auto max-w-2xl px-6 py-8 sm:py-10">
       <Nav lang={lang} />
       <slot />
       <footer
-        class="mt-16 pt-6 border-t border-neutral-200 text-sm leading-6 text-neutral-500 dark:border-neutral-900"
+        class="mt-10 pt-4 border-t border-neutral-200 text-xs leading-5 text-neutral-500 sm:text-sm dark:border-neutral-900"
       >
         © {new Date().getFullYear()} Arda Korkmaz
       </footer>

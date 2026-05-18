@@ -22,18 +22,18 @@ const timelineEntries = [
 const dotClass = "bg-neutral-400 dark:bg-neutral-600";
 ---
 
-<div class="relative mt-2">
-  <ol class="space-y-4">
+<div class="relative mt-1.5">
+  <ol class="space-y-2.5">
     {
       timelineEntries.map((e) => (
-        <li class="relative pl-5">
+        <li class="relative pl-4">
           <span
             aria-hidden="true"
             class:list={["absolute left-0 top-1.5 size-1.5 rounded-full", dotClass]}
           />
-          <p class="text-sm leading-6 text-neutral-500">{e.date}</p>
-          <p class="mt-0.5 text-[1rem] leading-6 font-medium">{e.title}</p>
-          {e.sub && <p class="mt-0.5 text-sm leading-6 text-neutral-500">{e.sub}</p>}
+          <p class="text-xs leading-5 text-neutral-500 sm:text-sm">{e.date}</p>
+          <p class="mt-0.5 text-[0.95rem] leading-5 font-medium sm:text-[1rem]">{e.title}</p>
+          {e.sub && <p class="mt-0.5 text-xs leading-5 text-neutral-500 sm:text-sm">{e.sub}</p>}
         </li>
       ))
     }
