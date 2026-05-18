@@ -50,6 +50,7 @@ export const ui = {
     contact: { github: "GitHub", linkedin: "LinkedIn" },
     switchLang: { label: "TR", aria: "Türkçe versiyona geç" },
     themeAria: "Toggle theme",
+    loading: "Loading",
   },
   tr: {
     meta: {
@@ -99,6 +100,7 @@ export const ui = {
     contact: { github: "GitHub", linkedin: "LinkedIn" },
     switchLang: { label: "EN", aria: "Switch to English" },
     themeAria: "Temayı değiştir",
+    loading: "Yükleniyor",
   },
 } as const;
 

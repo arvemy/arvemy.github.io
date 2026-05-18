@@ -13,15 +13,27 @@ const ui = t(lang);
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} class="is-loading">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any" />
     <title>{ui.meta.title}</title>
     <meta name="description" content={ui.meta.description} />
     <meta name="generator" content={Astro.generator} />
+    <noscript>
+      <style>
+        html.is-loading [data-site-content] {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        html.is-loading .site-loader {
+          display: none;
+        }
+      </style>
+    </noscript>
     <ClientRouter />
     <script is:inline>
       (function () {
@@ -42,9 +54,87 @@ const ui = t(lang);
         }
       })();
     </script>
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        var fallbackDelay = 5000;
+        var currentTimer;
+        var initialWindowLoaded = document.readyState === "complete";
+
+        function setLoading(loading) {
+          root.classList.toggle("is-loading", loading);
+          root.classList.toggle("is-loaded", !loading);
+        }
+
+        function waitForFonts() {
+          if (!document.fonts || !document.fonts.ready) {
+            return Promise.resolve();
+          }
+
+          return document.fonts.ready.catch(function () {});
+        }
+
+        function waitForWindowLoad() {
+          if (document.readyState === "complete") {
+            return Promise.resolve();
+          }
+
+          return new Promise(function (resolve) {
+            window.addEventListener("load", resolve, { once: true });
+          });
+        }
+
+        waitForWindowLoad().then(function () {
+          initialWindowLoaded = true;
+        });
+
+        function revealWhenReady(waitForWindow, showBeforeWaiting) {
+          window.clearTimeout(currentTimer);
+          if (showBeforeWaiting) {
+            setLoading(true);
+          }
+
+          var waits = [waitForFonts()];
+          if (waitForWindow) {
+            waits.push(waitForWindowLoad());
+          }
+
+          var done = false;
+          function finish() {
+            if (done) return;
+            done = true;
+            setLoading(false);
+          }
+
+          Promise.all(waits).then(finish, finish);
+          currentTimer = window.setTimeout(finish, fallbackDelay);
+        }
+
+        revealWhenReady(true, false);
+
+        if (!window.__siteLoadingBound) {
+          document.addEventListener("astro:before-preparation", function () {
+            setLoading(true);
+          });
+
+          document.addEventListener("astro:after-swap", function () {
+            revealWhenReady(false, true);
+          });
+
+          document.addEventListener("astro:page-load", function () {
+            revealWhenReady(!initialWindowLoaded, false);
+          });
+
+          window.__siteLoadingBound = true;
+        }
+      })();
+    </script>
   </head>
   <body class="bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
-    <main class="mx-auto max-w-2xl px-6 py-12">
+    <div class="site-loader" role="status" aria-label={ui.loading}>
+      <span class="site-loader__ring" aria-hidden="true"></span>
+    </div>
+    <main data-site-content class="mx-auto max-w-2xl px-6 py-12">
       <Nav lang={lang} />
       <slot />
       <footer

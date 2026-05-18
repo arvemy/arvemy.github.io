@@ -14,8 +14,82 @@ html {
   color-scheme: light dark;
 }
 
+html.is-loading {
+  overflow: hidden;
+}
+
+[data-site-content] {
+  opacity: 1;
+  transition: opacity 180ms ease;
+}
+
+html.is-loading [data-site-content] {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.site-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  background: rgb(255 255 255);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 180ms ease,
+    visibility 0s linear 180ms;
+  visibility: hidden;
+}
+
+.dark .site-loader {
+  background: rgb(10 10 10);
+}
+
+html.is-loading .site-loader {
+  opacity: 1;
+  pointer-events: auto;
+  transition-delay: 0s;
+  visibility: visible;
+}
+
+.site-loader__ring {
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 2px solid rgb(212 212 212);
+  border-top-color: rgb(23 23 23);
+  border-radius: 9999px;
+  animation: site-loader-spin 780ms linear infinite;
+}
+
+.dark .site-loader__ring {
+  border-color: rgb(38 38 38);
+  border-top-color: rgb(245 245 245);
+}
+
+@keyframes site-loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: 220ms;
   animation-timing-function: ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-site-content],
+  .site-loader,
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 1ms;
+    transition-duration: 1ms;
+  }
+
+  .site-loader__ring {
+    animation: none;
+  }
 }
