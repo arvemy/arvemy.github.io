@@ -1,7 +1,7 @@
 ---
-import { Sun, Moon } from "@lucide/astro";
-import { t } from "../i18n/utils";
+import { Moon, Sun } from "@lucide/astro";
 import type { Lang } from "../i18n/ui";
+import { t } from "../i18n/utils";
 
 interface Props {
   lang: Lang;
@@ -21,22 +21,22 @@ const ui = t(lang);
 </button>
 
 <script>
-  function applyTheme(dark: boolean) {
-    document.documentElement.classList.toggle("dark", dark);
-    try {
-      localStorage.setItem("theme", dark ? "dark" : "light");
-    } catch (_) {}
-  }
+function applyTheme(dark: boolean) {
+  document.documentElement.classList.toggle("dark", dark);
+  try {
+    localStorage.setItem("theme", dark ? "dark" : "light");
+  } catch (_) {}
+}
 
-  document.addEventListener("click", (event) => {
-    const target = event.target as Element | null;
-    if (!target?.closest?.("[data-theme-toggle]")) return;
-    const next = !document.documentElement.classList.contains("dark");
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!document.startViewTransition || reduceMotion) {
-      applyTheme(next);
-      return;
-    }
-    document.startViewTransition(() => applyTheme(next));
-  });
+document.addEventListener("click", (event) => {
+  const target = event.target as Element | null;
+  if (!target?.closest?.("[data-theme-toggle]")) return;
+  const next = !document.documentElement.classList.contains("dark");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!document.startViewTransition || reduceMotion) {
+    applyTheme(next);
+    return;
+  }
+  document.startViewTransition(() => applyTheme(next));
+});
 </script>

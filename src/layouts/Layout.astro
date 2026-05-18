@@ -2,8 +2,8 @@
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
 import Nav from "../components/Nav.astro";
-import { t } from "../i18n/utils";
 import type { Lang } from "../i18n/ui";
+import { t } from "../i18n/utils";
 
 interface Props {
   lang: Lang;
@@ -21,135 +21,135 @@ const alternateOgLocale = lang === "tr" ? "en_US" : "tr_TR";
 <!doctype html>
 <html lang={lang} class="is-loading">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any">
     <title>{ui.meta.title}</title>
-    <meta name="description" content={ui.meta.description} />
-    <meta name="generator" content={Astro.generator} />
-    <link rel="canonical" href={canonicalUrl.href} />
-    <link rel="alternate" hreflang="en" href={englishUrl.href} />
-    <link rel="alternate" hreflang="tr" href={turkishUrl.href} />
-    <link rel="alternate" hreflang="x-default" href={englishUrl.href} />
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Arda Korkmaz" />
-    <meta property="og:title" content={ui.meta.title} />
-    <meta property="og:description" content={ui.meta.description} />
-    <meta property="og:url" content={canonicalUrl.href} />
-    <meta property="og:locale" content={ogLocale} />
-    <meta property="og:locale:alternate" content={alternateOgLocale} />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content={ui.meta.title} />
-    <meta name="twitter:description" content={ui.meta.description} />
+    <meta name="description" content={ui.meta.description}>
+    <meta name="generator" content={Astro.generator}>
+    <link rel="canonical" href={canonicalUrl.href}>
+    <link rel="alternate" hreflang="en" href={englishUrl.href}>
+    <link rel="alternate" hreflang="tr" href={turkishUrl.href}>
+    <link rel="alternate" hreflang="x-default" href={englishUrl.href}>
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Arda Korkmaz">
+    <meta property="og:title" content={ui.meta.title}>
+    <meta property="og:description" content={ui.meta.description}>
+    <meta property="og:url" content={canonicalUrl.href}>
+    <meta property="og:locale" content={ogLocale}>
+    <meta property="og:locale:alternate" content={alternateOgLocale}>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content={ui.meta.title}>
+    <meta name="twitter:description" content={ui.meta.description}>
     <noscript>
       <style>
-        html.is-loading [data-site-content] {
-          opacity: 1;
-          visibility: visible;
-        }
+      html.is-loading [data-site-content] {
+        opacity: 1;
+        visibility: visible;
+      }
 
-        html.is-loading .site-loader {
-          display: none;
-        }
+      html.is-loading .site-loader {
+        display: none;
+      }
       </style>
     </noscript>
     <ClientRouter />
     <script is:inline>
-      (function () {
-        function applyTheme() {
-          try {
-            var saved = localStorage.getItem("theme");
-            var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-            var dark = saved ? saved === "dark" : prefersDark;
-            document.documentElement.classList.toggle("dark", dark);
-          } catch (_) {}
-        }
+    (() => {
+      function applyTheme() {
+        try {
+          const saved = localStorage.getItem("theme");
+          const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          const dark = saved ? saved === "dark" : prefersDark;
+          document.documentElement.classList.toggle("dark", dark);
+        } catch {}
+      }
 
-        applyTheme();
+      applyTheme();
 
-        if (!window.__themeAfterSwapBound) {
-          document.addEventListener("astro:after-swap", applyTheme);
-          window.__themeAfterSwapBound = true;
-        }
-      })();
+      if (!window.__themeAfterSwapBound) {
+        document.addEventListener("astro:after-swap", applyTheme);
+        window.__themeAfterSwapBound = true;
+      }
+    })();
     </script>
     <script is:inline>
-      (function () {
-        var root = document.documentElement;
-        var fallbackDelay = 5000;
-        var currentTimer;
-        var initialWindowLoaded = document.readyState === "complete";
+    (() => {
+      const root = document.documentElement;
+      const fallbackDelay = 5000;
+      let currentTimer = 0;
+      let initialWindowLoaded = document.readyState === "complete";
 
-        function setLoading(loading) {
-          root.classList.toggle("is-loading", loading);
-          root.classList.toggle("is-loaded", !loading);
+      function setLoading(loading) {
+        root.classList.toggle("is-loading", loading);
+        root.classList.toggle("is-loaded", !loading);
+      }
+
+      function waitForFonts() {
+        if (!document.fonts?.ready) {
+          return Promise.resolve();
         }
 
-        function waitForFonts() {
-          if (!document.fonts || !document.fonts.ready) {
-            return Promise.resolve();
-          }
+        return document.fonts.ready.catch(() => {});
+      }
 
-          return document.fonts.ready.catch(function () {});
+      function waitForWindowLoad() {
+        if (document.readyState === "complete") {
+          return Promise.resolve();
         }
 
-        function waitForWindowLoad() {
-          if (document.readyState === "complete") {
-            return Promise.resolve();
-          }
+        return new Promise((resolve) => {
+          window.addEventListener("load", resolve, { once: true });
+        });
+      }
 
-          return new Promise(function (resolve) {
-            window.addEventListener("load", resolve, { once: true });
-          });
+      waitForWindowLoad().then(() => {
+        initialWindowLoaded = true;
+      });
+
+      function revealWhenReady(waitForWindow, showBeforeWaiting) {
+        window.clearTimeout(currentTimer);
+        if (showBeforeWaiting) {
+          setLoading(true);
         }
 
-        waitForWindowLoad().then(function () {
-          initialWindowLoaded = true;
+        const waits = [waitForFonts()];
+        if (waitForWindow) {
+          waits.push(waitForWindowLoad());
+        }
+
+        let done = false;
+        function finish() {
+          if (done) return;
+          done = true;
+          setLoading(false);
+        }
+
+        Promise.all(waits).then(finish, finish);
+        currentTimer = window.setTimeout(finish, fallbackDelay);
+      }
+
+      revealWhenReady(true, false);
+
+      if (!window.__siteLoadingBound) {
+        document.addEventListener("astro:before-preparation", () => {
+          setLoading(true);
         });
 
-        function revealWhenReady(waitForWindow, showBeforeWaiting) {
-          window.clearTimeout(currentTimer);
-          if (showBeforeWaiting) {
-            setLoading(true);
-          }
+        document.addEventListener("astro:after-swap", () => {
+          revealWhenReady(false, true);
+        });
 
-          var waits = [waitForFonts()];
-          if (waitForWindow) {
-            waits.push(waitForWindowLoad());
-          }
+        document.addEventListener("astro:page-load", () => {
+          revealWhenReady(!initialWindowLoaded, false);
+        });
 
-          var done = false;
-          function finish() {
-            if (done) return;
-            done = true;
-            setLoading(false);
-          }
-
-          Promise.all(waits).then(finish, finish);
-          currentTimer = window.setTimeout(finish, fallbackDelay);
-        }
-
-        revealWhenReady(true, false);
-
-        if (!window.__siteLoadingBound) {
-          document.addEventListener("astro:before-preparation", function () {
-            setLoading(true);
-          });
-
-          document.addEventListener("astro:after-swap", function () {
-            revealWhenReady(false, true);
-          });
-
-          document.addEventListener("astro:page-load", function () {
-            revealWhenReady(!initialWindowLoaded, false);
-          });
-
-          window.__siteLoadingBound = true;
-        }
-      })();
+        window.__siteLoadingBound = true;
+      }
+    })();
     </script>
   </head>
   <body class="bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">

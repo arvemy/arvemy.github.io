@@ -1,12 +1,12 @@
 ---
-import Section from "./Section.astro";
-import Timeline from "./Timeline.astro";
-import Project from "./Project.astro";
+import { profile, projects } from "../data/profile";
+import type { Lang } from "../i18n/ui";
+import { t } from "../i18n/utils";
 import GithubIcon from "../icons/github.svg";
 import LinkedinIcon from "../icons/linkedin.svg";
-import { t } from "../i18n/utils";
-import type { Lang } from "../i18n/ui";
-import { profile, projects } from "../data/profile";
+import Project from "./Project.astro";
+import Section from "./Section.astro";
+import Timeline from "./Timeline.astro";
 
 interface Props {
   lang: Lang;
@@ -17,7 +17,9 @@ const ui = t(lang);
 
 <header>
   <h1 class="text-xl font-semibold sm:text-2xl">{profile.name}</h1>
-  <p class="mt-1.5 text-[0.97rem] leading-6 text-neutral-700 sm:text-[1.02rem] dark:text-neutral-300">
+  <p
+    class="mt-1.5 text-[0.97rem] leading-6 text-neutral-700 sm:text-[1.02rem] dark:text-neutral-300"
+  >
     {ui.hero.tagline}
   </p>
   <p class="text-sm leading-5 text-neutral-500 sm:text-[0.95rem]">{ui.hero.location}</p>
@@ -31,16 +33,14 @@ const ui = t(lang);
 </Section>
 
 <Section title={ui.sections.projects}>
-  {
-    projects.map((p) => (
+  {projects.map((p) => (
       <Project
         name={p.name}
         url={p.url}
         tagline={ui.projects[p.slug].tagline}
         tech={ui.projects[p.slug].tech}
       />
-    ))
-  }
+    ))}
 </Section>
 
 <Section title={ui.sections.contact}>

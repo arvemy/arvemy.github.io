@@ -24,8 +24,7 @@ const dotClass = "bg-neutral-400 dark:bg-neutral-600";
 
 <div class="relative mt-1.5">
   <ol class="space-y-2.5">
-    {
-      timelineEntries.map((e) => (
+    {timelineEntries.map((e) => (
         <li class="relative pl-4">
           <span
             aria-hidden="true"
@@ -35,7 +34,6 @@ const dotClass = "bg-neutral-400 dark:bg-neutral-600";
           <p class="mt-0.5 text-[0.95rem] leading-5 font-medium sm:text-[1rem]">{e.title}</p>
           {e.sub && <p class="mt-0.5 text-xs leading-5 text-neutral-500 sm:text-sm">{e.sub}</p>}
         </li>
-      ))
-    }
+      ))}
   </ol>
 </div>
