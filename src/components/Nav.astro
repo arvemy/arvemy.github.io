@@ -1,0 +1,15 @@
+---
+import LangSwitcher from "./LangSwitcher.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+import type { Lang } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+---
+
+<nav class="flex items-center justify-end gap-3 mb-12">
+  <LangSwitcher lang={lang} />
+  <ThemeToggle lang={lang} />
+</nav>

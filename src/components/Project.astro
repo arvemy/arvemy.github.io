@@ -1,0 +1,27 @@
+---
+import { ArrowUpRight } from "@lucide/astro";
+
+interface Props {
+  name: string;
+  url: string;
+  tagline: string;
+  tech: string;
+}
+const { name, url, tagline, tech } = Astro.props;
+---
+
+<article>
+  <a
+    href={url}
+    class="group inline-flex items-center gap-1 font-medium hover:underline"
+    target="_blank"
+    rel="noreferrer"
+  >
+    {name}
+    <ArrowUpRight size={14} stroke-width={1.75} class="opacity-60 group-hover:opacity-100" />
+  </a>
+  <p class="mt-1.5 text-[1.02rem] leading-7 text-neutral-700 dark:text-neutral-300">
+    {tagline}
+  </p>
+  <p class="mt-1 text-sm leading-6 text-neutral-500">{tech}</p>
+</article>

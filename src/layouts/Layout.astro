@@ -1,0 +1,57 @@
+---
+import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
+import Nav from "../components/Nav.astro";
+import { t } from "../i18n/utils";
+import type { Lang } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const ui = t(lang);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <title>{ui.meta.title}</title>
+    <meta name="description" content={ui.meta.description} />
+    <meta name="generator" content={Astro.generator} />
+    <ClientRouter />
+    <script is:inline>
+      (function () {
+        function applyTheme() {
+          try {
+            var saved = localStorage.getItem("theme");
+            var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            var dark = saved ? saved === "dark" : prefersDark;
+            document.documentElement.classList.toggle("dark", dark);
+          } catch (_) {}
+        }
+
+        applyTheme();
+
+        if (!window.__themeAfterSwapBound) {
+          document.addEventListener("astro:after-swap", applyTheme);
+          window.__themeAfterSwapBound = true;
+        }
+      })();
+    </script>
+  </head>
+  <body class="bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
+    <main class="mx-auto max-w-2xl px-6 py-12">
+      <Nav lang={lang} />
+      <slot />
+      <footer
+        class="mt-16 pt-6 border-t border-neutral-200 text-sm leading-6 text-neutral-500 dark:border-neutral-900"
+      >
+        © {new Date().getFullYear()} Arda Korkmaz
+      </footer>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+---
+type Status = "ongoing" | "done";
+
+interface Entry {
+  date: string;
+  title: string;
+  sub?: string;
+  status?: Status;
+}
+interface Props {
+  entries: readonly Entry[];
+}
+const { entries } = Astro.props;
+const [education, internship, graduation] = entries;
+const timelineEntries = [
+  education && graduation
+    ? { ...education, date: `${education.date} - ${graduation.date}` }
+    : education,
+  internship,
+].filter((entry): entry is Entry => Boolean(entry));
+
+const dotClass = "bg-neutral-400 dark:bg-neutral-600";
+---
+
+<div class="relative mt-2">
+  <ol class="space-y-4">
+    {
+      timelineEntries.map((e) => (
+        <li class="relative pl-5">
+          <span
+            aria-hidden="true"
+            class:list={["absolute left-0 top-1.5 size-1.5 rounded-full", dotClass]}
+          />
+          <p class="text-sm leading-6 text-neutral-500">{e.date}</p>
+          <p class="mt-0.5 text-[1rem] leading-6 font-medium">{e.title}</p>
+          {e.sub && <p class="mt-0.5 text-sm leading-6 text-neutral-500">{e.sub}</p>}
+        </li>
+      ))
+    }
+  </ol>
+</div>

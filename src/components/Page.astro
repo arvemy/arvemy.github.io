@@ -1,0 +1,71 @@
+---
+import Section from "./Section.astro";
+import Timeline from "./Timeline.astro";
+import Project from "./Project.astro";
+import GithubIcon from "../icons/github.svg";
+import LinkedinIcon from "../icons/linkedin.svg";
+import { t } from "../i18n/utils";
+import type { Lang } from "../i18n/ui";
+import { profile, projects } from "../data/profile";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const ui = t(lang);
+---
+
+<header>
+  <h1 class="text-2xl font-semibold">{profile.name}</h1>
+  <p class="mt-2 text-[1.02rem] leading-7 text-neutral-700 dark:text-neutral-300">
+    {ui.hero.tagline}
+  </p>
+  <p class="text-[0.95rem] leading-6 text-neutral-500">{ui.hero.location}</p>
+</header>
+
+<Section title={ui.sections.about}>
+  <p class="text-[1.02rem] leading-7 text-neutral-700 dark:text-neutral-300">
+    {ui.about}
+  </p>
+  <Timeline entries={ui.timeline} />
+</Section>
+
+<Section title={ui.sections.projects}>
+  {
+    projects.map((p) => (
+      <Project
+        name={p.name}
+        url={p.url}
+        tagline={ui.projects[p.slug].tagline}
+        tech={ui.projects[p.slug].tech}
+      />
+    ))
+  }
+</Section>
+
+<Section title={ui.sections.contact}>
+  <ul class="space-y-1.5 text-[0.98rem] leading-7">
+    <li>
+      <a
+        href={profile.github}
+        class="inline-flex items-center gap-2 hover:underline"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <GithubIcon width={14} height={14} fill="currentColor" />
+        {profile.githubLabel}
+      </a>
+    </li>
+    <li>
+      <a
+        href={profile.linkedin}
+        class="inline-flex items-center gap-2 hover:underline"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <LinkedinIcon width={14} fill="currentColor" />
+        {profile.linkedinLabel}
+      </a>
+    </li>
+  </ul>
+</Section>

@@ -1,0 +1,23 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { Languages } from "@lucide/astro";
+import { t } from "../i18n/utils";
+import type { Lang } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const target: Lang = lang === "en" ? "tr" : "en";
+const href = getRelativeLocaleUrl(target, "/");
+const ui = t(lang);
+---
+
+<a
+  href={href}
+  class="inline-flex items-center gap-1.5 text-[0.95rem] leading-6 hover:underline"
+  aria-label={ui.switchLang.aria}
+>
+  <Languages size={16} stroke-width={1.75} />
+  {ui.switchLang.label}
+</a>
