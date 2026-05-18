@@ -5,8 +5,7 @@ export const ui = {
   en: {
     meta: {
       title: "Arda Korkmaz",
-      description:
-        "Personal site of Arda Korkmaz — engineering side projects in TypeScript, Rust, and Go.",
+      description: "Personal site of Arda Korkmaz.",
     },
     hero: {
       tagline: "Engineer.",
@@ -55,8 +54,7 @@ export const ui = {
   tr: {
     meta: {
       title: "Arda Korkmaz",
-      description:
-        "Arda Korkmaz'ın kişisel sitesi — TypeScript, Rust ve Go üzerine yan projeler.",
+      description: "Arda Korkmaz'ın kişisel sitesi.",
     },
     hero: {
       tagline: "Mühendis.",
