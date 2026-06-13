@@ -30,9 +30,9 @@ const dotClass = "bg-neutral-400 dark:bg-neutral-600";
             aria-hidden="true"
             class:list={["absolute left-0 top-1.5 size-1.5 rounded-full", dotClass]}
           />
-          <p class="text-xs leading-5 text-neutral-500 sm:text-sm">{e.date}</p>
+          <p class="text-xs leading-5 text-neutral-500 sm:text-sm dark:text-neutral-400">{e.date}</p>
           <p class="mt-0.5 text-[0.95rem] leading-5 font-medium sm:text-[1rem]">{e.title}</p>
-          {e.sub && <p class="mt-0.5 text-xs leading-5 text-neutral-500 sm:text-sm">{e.sub}</p>}
+          {e.sub && <p class="mt-0.5 text-xs leading-5 text-neutral-500 sm:text-sm dark:text-neutral-400">{e.sub}</p>}
         </li>
       ))}
   </ol>

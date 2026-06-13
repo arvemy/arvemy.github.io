@@ -6,7 +6,11 @@ const { title } = Astro.props;
 ---
 
 <section class="mt-8">
-  <h2 class="mb-3 text-xs uppercase tracking-wider text-neutral-500 sm:text-sm">{title}</h2>
+  <h2
+    class="mb-3 text-xs uppercase tracking-wider text-neutral-500 sm:text-sm dark:text-neutral-400"
+  >
+    {title}
+  </h2>
   <div class="space-y-2.5">
     <slot />
   </div>

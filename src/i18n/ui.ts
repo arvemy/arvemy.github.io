@@ -5,10 +5,13 @@ export const ui = {
   en: {
     meta: {
       title: "Arda Korkmaz",
-      description: "Personal site of Arda Korkmaz.",
+      description:
+        "Arda Korkmaz — computer engineering student in İzmir, Türkiye. Building desktop apps and web tools with Rust, Tauri, and SvelteKit.",
+      ogImage: "/og-image.png",
+      ogImageAlt: "Arda Korkmaz — computer engineering student in İzmir, Türkiye",
     },
     hero: {
-      tagline: "Engineer.",
+      tagline: "Computer engineering student.",
       location: "İzmir, Türkiye",
     },
     sections: {
@@ -18,7 +21,7 @@ export const ui = {
       contact: "Contact",
     },
     about:
-      "Computer engineering student in İzmir. Drinking coffee and developing side projects in my spare time.",
+      "Studying computer engineering at Yaşar University. Drinking coffee and developing side projects in my spare time.",
     timeline: [
       {
         date: "Sep 2021",
@@ -28,7 +31,7 @@ export const ui = {
       },
       {
         date: "Aug 2025 - Sep 2025",
-        title: "İYTE",
+        title: "İzmir Institute of Technology (İYTE)",
         sub: "Computer Engineering Intern",
         status: "done",
       },
@@ -49,15 +52,17 @@ export const ui = {
     contact: { github: "GitHub", linkedin: "LinkedIn" },
     switchLang: { label: "TR", aria: "Türkçe versiyona geç" },
     themeAria: "Toggle theme",
-    loading: "Loading",
   },
   tr: {
     meta: {
       title: "Arda Korkmaz",
-      description: "Arda Korkmaz'ın kişisel sitesi.",
+      description:
+        "Arda Korkmaz — İzmir'de bilgisayar mühendisliği öğrencisi. Rust, Tauri ve SvelteKit ile masaüstü uygulamaları ve web araçları geliştiriyor.",
+      ogImage: "/og-image-tr.png",
+      ogImageAlt: "Arda Korkmaz — İzmir'de bilgisayar mühendisliği öğrencisi",
     },
     hero: {
-      tagline: "Mühendis.",
+      tagline: "Bilgisayar mühendisliği öğrencisi.",
       location: "İzmir, Türkiye",
     },
     sections: {
@@ -67,7 +72,7 @@ export const ui = {
       contact: "İletişim",
     },
     about:
-      "İzmir'de bilgisayar mühendisliği öğrencisiyim. Boş zamanlarımda kahve içip yan projeler geliştiriyorum.",
+      "Yaşar Üniversitesi'nde bilgisayar mühendisliği okuyorum. Boş zamanlarımda kahve içip yan projeler geliştiriyorum.",
     timeline: [
       {
         date: "Eyl 2021",
@@ -98,7 +103,6 @@ export const ui = {
     contact: { github: "GitHub", linkedin: "LinkedIn" },
     switchLang: { label: "EN", aria: "Switch to English" },
     themeAria: "Temayı değiştir",
-    loading: "Yükleniyor",
   },
 } as const;
 
