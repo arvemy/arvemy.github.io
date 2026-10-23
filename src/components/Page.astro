@@ -36,13 +36,13 @@ const ui = t(lang);
 
 <Section title={ui.sections.projects}>
   {projects.map((p) => (
-      <Project
-        name={p.name}
-        url={p.url}
-        tagline={ui.projects[p.slug].tagline}
-        tech={ui.projects[p.slug].tech}
-      />
-    ))}
+    <Project
+      name={p.name}
+      url={p.url}
+      tagline={ui.projects[p.slug].tagline}
+      tech={ui.projects[p.slug].tech}
+    />
+  ))}
 </Section>
 
 <Section title={ui.sections.contact}>
