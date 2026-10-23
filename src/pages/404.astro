@@ -1,0 +1,33 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import type { Lang } from "../i18n/ui";
+import { t } from "../i18n/utils";
+import Layout from "../layouts/Layout.astro";
+
+// GitHub Pages serves this single page for every missing URL, so show both languages
+const langs: Lang[] = ["en", "tr"];
+const ui = t("en");
+---
+
+<Layout lang="en" title={`${ui.notFound.title} — ${ui.meta.title}`} noindex>
+  <header>
+    <h1 class="text-xl font-semibold sm:text-2xl">404</h1>
+  </header>
+  {langs.map((lang) => {
+    const strings = t(lang).notFound;
+    return (
+      <section lang={lang} class="mt-8">
+        <h2 class="text-[0.97rem] font-medium sm:text-[1.02rem]">{strings.title}</h2>
+        <p class="mt-1 text-[0.97rem] leading-6 text-neutral-700 sm:text-[1.02rem] dark:text-neutral-300">
+          {strings.message}
+        </p>
+        <a
+          href={getRelativeLocaleUrl(lang, "/")}
+          class="mt-1 inline-block text-sm leading-6 hover:underline sm:text-[0.95rem]"
+        >
+          {strings.back}
+        </a>
+      </section>
+    );
+  })}
+</Layout>

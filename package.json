@@ -16,15 +16,15 @@
     "fix": "biome check --write ."
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.12",
-    "@fontsource-variable/jetbrains-mono": "^5.3.0",
+    "@astrojs/sitemap": "^3.7.4",
     "@lucide/astro": "^1.61.0",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.4.2",
-    "tailwindcss": "^4.3.3",
-    "typescript": "^6.0.3"
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.6.2"
+    "@astrojs/check": "^0.9.12",
+    "@biomejs/biome": "2.6.2",
+    "typescript": "^6.0.3"
   }
 }

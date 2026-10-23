@@ -1,15 +1,18 @@
 ---
 import "../styles/global.css";
-import { ClientRouter } from "astro:transitions";
+import { Font } from "astro:assets";
 import Nav from "../components/Nav.astro";
 import type { Lang } from "../i18n/ui";
 import { t } from "../i18n/utils";
 
 interface Props {
   lang: Lang;
+  title?: string;
+  noindex?: boolean;
 }
-const { lang } = Astro.props;
+const { lang, noindex = false } = Astro.props;
 const ui = t(lang);
+const title = Astro.props.title ?? ui.meta.title;
 const site = Astro.site ?? new URL(Astro.url.origin);
 const canonicalUrl = new URL(Astro.url.pathname, site);
 const englishUrl = new URL("/", site);
@@ -23,12 +26,15 @@ const ogImageUrl = new URL(ui.meta.ogImage, site);
 <html lang={lang}>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/favicon.ico">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any">
-    <title>{ui.meta.title}</title>
+    <link rel="sitemap" href="/sitemap-index.xml">
+    <Font cssVariable="--font-jetbrains-mono" preload={[{ subset: "latin" }]} />
+    <title>{title}</title>
     <meta name="description" content={ui.meta.description}>
     <meta name="generator" content={Astro.generator}>
+    {noindex && <meta name="robots" content="noindex">}
     <link rel="canonical" href={canonicalUrl.href}>
     <link rel="alternate" hreflang="en" href={englishUrl.href}>
     <link rel="alternate" hreflang="tr" href={turkishUrl.href}>
@@ -51,24 +57,20 @@ const ogImageUrl = new URL(ui.meta.ogImage, site);
     <meta name="twitter:description" content={ui.meta.description}>
     <meta name="twitter:image" content={ogImageUrl.href}>
     <meta name="twitter:image:alt" content={ui.meta.ogImageAlt}>
-    <ClientRouter />
     <script is:inline>
     (() => {
-      function applyTheme() {
-        try {
-          const saved = localStorage.getItem("theme");
-          const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-          const dark = saved ? saved === "dark" : prefersDark;
-          document.documentElement.classList.toggle("dark", dark);
-        } catch {}
-      }
-
-      applyTheme();
-
-      if (!window.__themeAfterSwapBound) {
-        document.addEventListener("astro:after-swap", applyTheme);
-        window.__themeAfterSwapBound = true;
-      }
+      try {
+        const saved = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const dark = saved ? saved === "dark" : prefersDark;
+        document.documentElement.classList.toggle("dark", dark);
+        // A saved choice overrides the OS-based theme-color metas
+        if (saved) {
+          for (const meta of document.querySelectorAll('meta[name="theme-color"]')) {
+            meta.content = dark ? "#0a0a0a" : "#ffffff";
+          }
+        }
+      } catch {}
     })();
     </script>
   </head>

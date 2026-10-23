@@ -6,12 +6,12 @@ export const ui = {
     meta: {
       title: "Arda Korkmaz",
       description:
-        "Arda Korkmaz — computer engineering student in İzmir, Türkiye. Building desktop apps and web tools with Rust, Tauri, and SvelteKit.",
+        "Arda Korkmaz — computer engineer in İzmir, Türkiye. Building desktop apps and web tools with Rust, Tauri, and SvelteKit.",
       ogImage: "/og-image.png",
-      ogImageAlt: "Arda Korkmaz — computer engineering student in İzmir, Türkiye",
+      ogImageAlt: "Arda Korkmaz — computer engineer in İzmir, Türkiye",
     },
     hero: {
-      tagline: "Computer engineering student.",
+      tagline: "Computer engineer.",
       location: "İzmir, Türkiye",
     },
     sections: {
@@ -21,21 +21,18 @@ export const ui = {
       contact: "Contact",
     },
     about:
-      "Studying computer engineering at Yaşar University. Drinking coffee and developing side projects in my spare time.",
+      "Computer engineering graduate of Yaşar University. Drinking coffee and developing side projects in my spare time.",
     timeline: [
       {
-        date: "Sep 2021",
+        date: "Sep 2021 - Jun 2026",
         title: "Yaşar University",
         sub: "B.S. Computer Engineering",
-        status: "ongoing",
       },
       {
         date: "Aug 2025 - Sep 2025",
         title: "İzmir Institute of Technology (İYTE)",
         sub: "Computer Engineering Intern",
-        status: "done",
       },
-      { date: "Jun 2026", title: "Graduating", sub: "Expected" },
     ],
     projects: {
       wovo: {
@@ -52,17 +49,22 @@ export const ui = {
     contact: { github: "GitHub", linkedin: "LinkedIn" },
     switchLang: { label: "TR", aria: "Türkçe versiyona geç" },
     themeAria: "Toggle theme",
+    notFound: {
+      title: "Page not found",
+      message: "This page doesn't exist or has moved.",
+      back: "Back to home",
+    },
   },
   tr: {
     meta: {
       title: "Arda Korkmaz",
       description:
-        "Arda Korkmaz — İzmir'de bilgisayar mühendisliği öğrencisi. Rust, Tauri ve SvelteKit ile masaüstü uygulamaları ve web araçları geliştiriyor.",
+        "Arda Korkmaz — İzmir'de bilgisayar mühendisi. Rust, Tauri ve SvelteKit ile masaüstü uygulamaları ve web araçları geliştiriyor.",
       ogImage: "/og-image-tr.png",
-      ogImageAlt: "Arda Korkmaz — İzmir'de bilgisayar mühendisliği öğrencisi",
+      ogImageAlt: "Arda Korkmaz — İzmir'de bilgisayar mühendisi",
     },
     hero: {
-      tagline: "Bilgisayar mühendisliği öğrencisi.",
+      tagline: "Bilgisayar mühendisi.",
       location: "İzmir, Türkiye",
     },
     sections: {
@@ -72,21 +74,18 @@ export const ui = {
       contact: "İletişim",
     },
     about:
-      "Yaşar Üniversitesi'nde bilgisayar mühendisliği okuyorum. Boş zamanlarımda kahve içip yan projeler geliştiriyorum.",
+      "Yaşar Üniversitesi Bilgisayar Mühendisliği mezunuyum. Boş zamanlarımda kahve içip yan projeler geliştiriyorum.",
     timeline: [
       {
-        date: "Eyl 2021",
+        date: "Eyl 2021 - Haz 2026",
         title: "Yaşar Üniversitesi",
         sub: "Bilgisayar Mühendisliği Lisans",
-        status: "ongoing",
       },
       {
         date: "Ağu 2025 - Eyl 2025",
         title: "İYTE",
         sub: "Bilgisayar Mühendisliği Stajyeri",
-        status: "done",
       },
-      { date: "Haz 2026", title: "Mezuniyet", sub: "Beklenen" },
     ],
     projects: {
       wovo: {
@@ -103,6 +102,11 @@ export const ui = {
     contact: { github: "GitHub", linkedin: "LinkedIn" },
     switchLang: { label: "EN", aria: "Switch to English" },
     themeAria: "Temayı değiştir",
+    notFound: {
+      title: "Sayfa bulunamadı",
+      message: "Bu sayfa mevcut değil veya taşınmış.",
+      back: "Ana sayfaya dön",
+    },
   },
 } as const;
 
